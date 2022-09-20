@@ -103,7 +103,11 @@ By reducing the number of loops information for 2017 improved from 0.8554688 sec
 
 ![VBA_Challenge_2017_original script](https://user-images.githubusercontent.com/110419577/191367087-380953d9-115a-467b-b749-1981d6edd4bd.png)![VBA_Challenge_2018-original script](https://user-images.githubusercontent.com/110419577/191367096-542cd949-8f7c-4f2b-b33e-dab1f428b370.png)
 
+## Summary
 
+### Advantages vs. Disadvantages of Refactoring Code
+
+### Pros and Cons applied to refactoring VBA script
 
 
 
