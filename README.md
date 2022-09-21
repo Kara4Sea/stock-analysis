@@ -1,11 +1,11 @@
 # Stock Analysis
-An analysis of client stocks
+An analysis of client stocks using VBA
 ## Overview of Project
 ### Purpose
-The purpose of this analysis is to determine the performance of thirteen stocks in the client's portfolio. The total daily volume and return percentage are calculated to evaluate each stock.
+The purpose of this analysis is to determine the performance of twelve stocks in the client's portfolio. The total daily volume and return percentage are calculated to evaluate each stock.
 ## Results
 ### 2017 vs 2018 Performance
-2017 saw far greater returns than 2018. All of the client's stocks in 2017 had positive returns, with DQ at the largest return of 199.4%. One stock saw a negative return in 2017, TERP at -7.2%. 
+2017 saw far greater returns than 2018. All but one of the client's stocks in 2017 had positive returns, with DQ at the largest return of 199.4%. One stock saw a negative return in 2017, TERP at -7.2%. 
 
 In 2018 all but two stocks had negative returns. DQ, which had the highest return in 2017, fell dramatically to -62.6%. TERP remained to reflect negative returns in 2018 with slight improvement with returns at -5.0%. ENHP and RUN were the only stocks with positive returns in 2018. RUN showed improvement with a return of 5.5% in 2017, which grew to 84.0% in 2018. While ENPH decreased from 129.5% in 2017 to 81.9% in 2018.
 
@@ -17,41 +17,41 @@ The execution time in the refactored script was far improved when pulling data f
 #### Original Script
 In the original script, we used the first for loop to loop through all the tickers by using the following code. 
 
-`For i = 0 To 11`
+     For i = 0 To 11
 
-    `ticker = tickers(i)`
+    ticker = tickers(i) 
 
-Then in the nested loop, we used If, Then to get the total volume for the current ticker.
+Then in the nested loop, we used a condition to get the total volume for the current ticker.
 
-`For j = 2 To RowCount`
+            For j = 2 To RowCount
            
-           `If Cells(j, 1).Value = ticker Then`
+            If Cells(j, 1).Value = ticker Then
 
-            `totalVolume = totalVolume + Cells(j, 8).Value`
+            totalVolume = totalVolume + Cells(j, 8).Value
 
-           `End If`
+            End If
            
-We used the same nested loop to establish two more If, Then to get the starting price and ending price for the current tracker.
+We used the same nested loop to establish two more conditions to get the starting price and ending price for the current tracker.
 
-            `If Cells(j - 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then`
+            If Cells(j - 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
 
-            `startingPrice = Cells(j, 6).Value`
+            startingPrice = Cells(j, 6).Value
 
-           ` End If`
+            End If
            
            
-           `If Cells(j + 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then`
+           If Cells(j + 1, 1).Value <> ticker And Cells(j, 1).Value = ticker Then
 
-          `endingPrice = Cells(j, 6).Value`
+           endingPrice = Cells(j, 6).Value
           
-            `End If`
+           End If
 
-      ` Next j`
+           Next j
 
 #### Refactored Script
 We eliminated the needs for a second loop by creating a variable for tickerIndex, and creating three output arrays for tickerVolumes, tickerStartingPrices and tickerEndingPrices.
 
-` Dim tickerIndex As Long
+    Dim tickerIndex As Long
     
     tickerIndex = 0
 
@@ -59,41 +59,41 @@ We eliminated the needs for a second loop by creating a variable for tickerIndex
     
     Dim tickerStartingPrices(12) As Single
     
-    Dim tickerEndingPrices(12) As Single`
+    Dim tickerEndingPrices(12) As Single
     
- We then established a loop to run through all of the arrays in the original ticker variable. and used If Then to iterate throug the tickerIndex to pull for each assinged number in the array starting with 0 for AY. 
+ We then established a loop to run through all of the arrays in the original ticker variable. and used conditions to iterate throug the tickerIndex to pull for each assinged number in the array starting with 0 for AY. 
  
- ` For i = 0 To 11
+   For i = 0 To 11
     
-    tickerVolumes(i) = 0
+   tickerVolumes(i) = 0
     
-    Next i
+   Next i
 
    For i = 2 To RowCount
         
-        tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value`
+   tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
         
  Then to determine tickerStartingPrices, we checked if the current row was the first row of the selected tickerIndex.
  
- ` If Cells(i - 1, 1).Value <> Cells(i, 1).Value Then
+   If Cells(i - 1, 1).Value <> Cells(i, 1).Value Then
 
-        tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
+   tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
         
-         End If`
+   End If
          
  Similarly to determine tickerEndingPrices, we checked if the current row was the last row with the selected ticker.
  
- `If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
 
-         tickerEndingPrices(tickerIndex) = Cells(i, 6).Value`
+         tickerEndingPrices(tickerIndex) = Cells(i, 6).Value
             
-We also increased the tickerIndex to allow it to run through all in the array, before ending the If.
+We also increased the tickerIndex to allow it to run through all in the array, before ending If.
             
-            `tickerIndex = tickerIndex + 1
+         tickerIndex = tickerIndex + 1
     
-         End If`
+         End If
          
-By reducing the number of loops information for 2017 improved from 0.8554688 seconds with the original script to 0.1640625 seconds with the refactored script. For 2018, we improved from with the original script to 0.125 seconds for the refactored script.
+By reducing the number of loops information for 2017 improved from 0.8554688 seconds with the original script to 0.1640625 seconds with the refactored script. For 2018, we improved from 0.890625 with the original script to 0.125 seconds for the refactored script.
 
 * Refactored:
 
@@ -107,10 +107,12 @@ By reducing the number of loops information for 2017 improved from 0.8554688 sec
 
 ### Advantages vs. Disadvantages of Refactoring Code
 
+There are several advantages and disadvantaged to refactoring code. The main objective of refactoring code is to create a more efficient code that will give the same output as the original. This reduces the time needed to run the code as well as memory used. Refactoring code can also make the original code easier to read, so that it can be adapted more easily by a new user.
+
+One disadvantage that I found to refactoring code is that it is timely. It can take longer to determine a efficient way to write code, than to have the code flow through several steps. Reading refactored code is also less easy to understand when working at a beginner level.
+
 ### Pros and Cons applied to refactoring VBA script
 
+Refactoring the VBA script worked to an advantage as it made the run time more efficient. The refactored code ran about 80 -85% faster than the original. Another pro is that the code is also more streamlined and succinct when compared to the original script. 
 
-
-
-
-
+A con is that it took me a lot longer to accomplish the refactored code than the original. But I'm glad that I spent the time as it was a great learning experience. I found the refactored code from the assignment to be more confusing than the original script. However, this is most likely wrapped up in being a beginner to this skill set and will most likely change as I continue to learn.
