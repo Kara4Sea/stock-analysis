@@ -63,23 +63,23 @@ We eliminated the needs for a second loop by creating a variable for tickerIndex
     
  We then established a loop to run through all of the arrays in the original ticker variable. and used conditions to iterate throug the tickerIndex to pull for each assinged number in the array starting with 0 for AY. 
  
-   For i = 0 To 11
+     For i = 0 To 11
     
-   tickerVolumes(i) = 0
+     tickerVolumes(i) = 0
     
-   Next i
+      Next i
 
-   For i = 2 To RowCount
+     For i = 2 To RowCount
         
-   tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
+      tickerVolumes(tickerIndex) = tickerVolumes(tickerIndex) + Cells(i, 8).Value
         
  Then to determine tickerStartingPrices, we checked if the current row was the first row of the selected tickerIndex.
  
-   If Cells(i - 1, 1).Value <> Cells(i, 1).Value Then
+     If Cells(i - 1, 1).Value <> Cells(i, 1).Value Then
 
-   tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
+     tickerStartingPrices(tickerIndex) = Cells(i, 6).Value
         
-   End If
+     End If
          
  Similarly to determine tickerEndingPrices, we checked if the current row was the last row with the selected ticker.
  
